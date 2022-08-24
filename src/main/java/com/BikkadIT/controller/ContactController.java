@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,14 @@ public class ContactController {
 			return new ResponseEntity<List<Contact>>(list, HttpStatus.BAD_REQUEST);
 		}
 		
+		
+	}
+	@GetMapping(value="/getByID/{contactId}",produces="application/json")
+	public ResponseEntity<Contact> getById(@PathVariable Integer contactId)
+	{
+		Contact contactById = contactServiceI.getContactById(contactId);
+		
+			return new ResponseEntity<Contact>(contactById,HttpStatus.OK);
 		
 	}
 	
