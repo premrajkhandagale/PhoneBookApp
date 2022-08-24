@@ -41,10 +41,66 @@ public class ContactServiceImpl implements ContactServiceI{
 	@Override
 	public Contact getContactById(Integer contactId) {
 		Contact findById = contactRepository.findById(contactId).get();
-		
 		return findById;
 	}
 
+	@Override
+	public boolean updateContact(Contact contact) {
+		Contact contact2 = contactRepository.save(contact);
+		if(contact2 !=null) {
+		return true;
+		}else {
+		return false;
+	}
+	}
+
+	@Override
+//	public boolean deleteById(Integer contactId) {
+//		boolean existsById = contactRepository.existsById(contactId);
+//		if(existsById)
+//		{
+//			contactRepository.deleteById(contactId);
+//			return true;
+//		}else {
+//			
+//			return false;
+//		}
+//		
+//	}
+	
+//	public boolean deleteById(Integer contactId) {
+//		Optional<Contact> findById = contactRepository.findById(contactId);
+//		if(findById.isPresent())
+//		{
+//			contactRepository.deleteById(contactId);
+//			return true;
+//		}else {
+//			return false;
+//
+//		}
+//				
+//	}
+	
+	public boolean deleteById(Integer contactId) {
+		Optional<Contact> contact = contactRepository.findById(contactId);
+		if(contact.isPresent())
+		{
+			Contact contact2 = contact.get();
+			contact2.setActiveSwitch('N');
+			contactRepository.save(contact2);
+			return true;
+		}else {
+		return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
